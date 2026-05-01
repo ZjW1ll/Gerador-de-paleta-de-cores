@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 :root {
-    --text-color: ;
+    --hex: white ;
+    --bg: aliceblue;
+    --text: black;
+    --icon: #0f172a;
+}
+
+.dark {
+    --bg: #0f172a;
+    --text: aliceblue;
+    --icon: aliceblue;
 }
 
 * {
@@ -8,13 +19,61 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+/*NAVBAR E TEMA*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+}
+
+.navbar-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.btn-page-theme {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid aliceblue;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease;
+    font-size: 0.82rem;
+    color: var(--icon);
+}
+
+.btn-page-theme:hover {
+    font-size: 1rem;
+}
+
+/* PALETA DE CORES */
 .palette {
     display: flex;
     background-color: aqua;
     border-radius: 12px;
     height: 14vh;
-    width: 80vw;
+    width: 60vw;
     overflow: hidden;
+    margin: 0 auto;
+}
+
+@media (max-width: 700px) { /* Alinhar para ficar bonito em telas pequenas */
+    .palette {
+        width: 80vw;
+    }
+
 }
 
 .card {
@@ -36,8 +95,52 @@
 }
 
 .hex {
-    color: var(--text-color);
+    color: var(--hex);
     transition: 0.3s ease;
-    color: hsl(hue, saturation, lightness);
+    user-select: none;
 }
 
+/*BOTÃO DA PALETA*/
+.btn-palette-generator {
+    margin: 40px auto 0;
+    display: block;
+    padding: 12px 26px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #60a5fa, #38bdf8);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-palette-generator:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(56, 189, 248, 0.3);
+}
+
+.btn-palette-generator:active {
+    transform: scale(95%);
+}
+
+footer {
+    position: absolute;
+    bottom: 40px;
+    width: 100vw;
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+}
+
+.contact a {
+    font-size: 3rem;
+    color: var(--icon);
+    transition: 0.3s ease;
+}
+
+.contact a:hover {
+    transform: scale(110%) translateY(-12px);
+}

@@ -1,7 +1,7 @@
 const cards = document.querySelectorAll('.card')
 const generateBtn = document.getElementById("btn-palette-generator")
 
-function generateColor(base, index) {
+function generateColor(base, index) { //Gerar cores
     let hue = base + Math.floor(Math.random() * 60 - 30);
     let complementary = hue + 180;
     let saturation = Math.floor(Math.random() * (90 - 50) + 50);
@@ -37,7 +37,7 @@ function generateColor(base, index) {
 
 }
 
-function hslToHex(hue, saturation, light) {
+function hslToHex(hue, saturation, light) { //Transformar hsl para hex
     saturation = saturation / 100;
     light = light / 100;
 
@@ -92,8 +92,7 @@ function hslToHex(hue, saturation, light) {
     return hex;
 }
 
-
-function generatePalette() {
+function generatePalette() { //Formar a paleta com as cores do generateColor()
     let base = Math.floor(Math.random() * 360)
     let index = 0;
 
@@ -103,10 +102,17 @@ function generatePalette() {
     
         card.style.backgroundColor = color.hsl; 
         const hex = card.querySelector(".hex");
-        hex.style.setProperty("--text-color", color.hsl);
+        hex.style.setProperty("--hex", color.hsl);
         hex.textContent = hslToHex(color.hue, color.saturation, color.light).toUpperCase();
         
-        card.addEventListener('click', () => {
+        
+    });
+}
+
+cards.forEach(card => { //Timer do "copiado" aparecer em tela
+    const hex = card.querySelector(".hex")
+
+    card.addEventListener('click', () => {
             const hexColor = hex.textContent;
             navigator.clipboard.writeText(hex.textContent);
             hex.textContent = "Copiado!"
@@ -114,15 +120,32 @@ function generatePalette() {
                 hex.textContent = hexColor
             }, 1500);
         })
-    });
-}
+})
 
-generateBtn.addEventListener('click', () => {
+generateBtn.addEventListener('click', () => { //Clicar gerar paleta
     generatePalette();
 })
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === "Space") {
+document.addEventListener('keydown', (event) => { //Botão do espaço gerar paleta
+    if (event.key === " ") {
         generatePalette();
+    }
+})
+
+generatePalette();
+
+//Mudar cor de fundo do site
+
+const btnPageTheme = document.getElementById('btn-page-theme');
+const body = document.body;
+const icon = btnPageTheme.querySelector("i")
+
+btnPageTheme.addEventListener('click', () => {
+    body.classList.toggle("dark");
+    
+    if (body.classList.contains("dark")) {
+        icon.classList.replace("fa-moon", "fa-sun");
+    } else {
+        icon.classList.replace("fa-sun", "fa-moon");
     }
 })
